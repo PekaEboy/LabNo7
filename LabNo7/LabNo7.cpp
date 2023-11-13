@@ -13,8 +13,8 @@ int Beta(int n, int k, int a[]) {
     }
 }
 int F(int n) {
-    if (n == 0) {
-        return 1;
+    if (n == 1) {
+        return 3;
     }
     else {
         return 2 * F(n - 1) + 1;
