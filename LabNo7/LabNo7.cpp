@@ -4,26 +4,21 @@
 #include <iostream>
 #include <Windows.h>
 using namespace std;
-int Beta(int i, int a[], int n) {
-    int j = 1;
-    while (j <= i/2) {
-        j = j * 2;
-    }
-    int p = n / j;
-    int kp = (i % j + i / j) * p;
-    int kn = (i % j + i / j - 1) * p;
-    int k = kn;
-    if (n == 1) {
-        return a[k];
+int Beta(int n, int k, int a[]) {
+    if (n == k - 1) {
+        return a[n];
     }
     else {
-        return a[k] + Beta(i, a, kp);
-
+        return a[n] + Beta(n + 1, k, a);
     }
 }
-
-int Alpha(int a[]) {
-    return a[2];
+int F(int n) {
+    if (n == 0) {
+        return 1;
+    }
+    else {
+        return 2 * F(n - 1) + 1;
+    }
 }
 int main()
 {
@@ -35,18 +30,31 @@ int main()
     int n = (int)pow(2, a);
     cout << "Длина массива а: " << n << endl;
     int A[100];
-    cout << "Введите массив: ";
+    cout << "Введите массив A: ";
     for (int i = 0; i < n; i++) {
         cin >> A[i];
     }
-    int h = 1;
-    for (int i = 1; i < 4; i++) {
-        cout << Beta(i, A, n);
+    int B[100];
+    int i = 1;
+    int fn = F(a);
+    for (int f = 0; f < fn; f++) {
+        int j = 1;
+        while (j <= i / 2) {
+            j = j * 2;
+        }
+        int p = n / j;
+        int kk = (i % j + i / j) * p;
+        int kn = (i % j + i / j - 1) * p;
+        B[f] = Beta(kn, kk, A);
+        i++;
+    }
+    cout << "Полученный массив B: ";
+    for (int f = 0; f < fn; f++) {
+        cout << B[f] << " ";
     }
     cout << endl;
     system("pause");
     return 0;
-
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
