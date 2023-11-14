@@ -4,17 +4,17 @@
 #include <iostream>
 #include <Windows.h>
 using namespace std;
-int Beta(int n, int k, int a[]) {
-    if (n == k - 1) {
-        return a[n];
+void Beta(int i, int n, int a[], int b[]) {
+    if (i >= n) {
+        b[i-1] = a[i % n];
     }
     else {
-        return a[n] + Beta(n + 1, k, a);
+        b[i-1] = b[i - 1+ i] + b[i - 1+ i +1];
     }
 }
 int F(int n) {
-    if (n == 1) {
-        return 3;
+    if (n == 0) {
+        return 1;
     }
     else {
         return 2 * F(n - 1) + 1;
@@ -35,18 +35,9 @@ int main()
         cin >> A[i];
     }
     int B[100];
-    int i = 1;
     int fn = F(a);
-    for (int f = 0; f < fn; f++) {
-        int j = 1;
-        while (j <= i / 2) {
-            j = j * 2;
-        }
-        int p = n / j;
-        int kk = (i % j + i / j) * p;
-        int kn = (i % j + i / j - 1) * p;
-        B[f] = Beta(kn, kk, A);
-        i++;
+    for (int i = fn; i > 0; i--) {
+        Beta(i, n, A, B);
     }
     cout << "Полученный массив B: ";
     for (int f = 0; f < fn; f++) {
