@@ -9,7 +9,9 @@ void Beta(int i, int n, int a[], int b[]) {
         b[i-1] = a[i % n];
     }
     else {
-        b[i-1] = b[i - 1+ i] + b[i - 1+ i +1];
+        Beta(i + i, n, a, b);
+        Beta(i + i+1, n, a, b);
+        b[i-1] = b[i - 1+ i] + b[i + i ];
     }
 }
 int F(int n) {
@@ -36,7 +38,8 @@ int main()
     }
     int B[100];
     int fn = F(a);
-    for (int i = fn; i > 0; i--) {
+    // или fn = 2*n-1;
+    for (int i = 1; i <= fn; i++) {
         Beta(i, n, A, B);
     }
     cout << "Полученный массив B: ";
