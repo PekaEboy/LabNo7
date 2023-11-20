@@ -39,9 +39,7 @@ int main()
     int B[100];
     int fn = F(a);
     // или fn = 2*n-1;
-    for (int i = 1; i <= fn; i++) {
-        Beta(i, n, A, B);
-    }
+    Beta(1, n, A, B);
     cout << "Полученный массив B: ";
     for (int f = 0; f < fn; f++) {
         cout << B[f] << " ";
